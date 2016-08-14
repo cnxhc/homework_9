@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="checkUser" class="userAction" method="checkUser">
+			<result name="success">/login_success.jsp</result>
+			<result name="error">/index.jsp</result>
+		</action>
+		<action name="logOut" class="userAction" method="logOut">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="deleteUser" class="userAction" method="deleteUser">
+			<result name="success" type="redirect">/showUser.action</result>
+			<result name="error" type="redirect">/showUser.action</result>
+		</action>
+		<action name="showUser" class="userAction" method="showUser">
+			<result name="success">user/showUser.jsp</result>
+		</action>
+		<action name="addUser" class="userAction" method="addUser">
+			<result name="success" type="redirect">/showUser.action</result>
+			<result name="error">user/addUser.jsp</result>
+		</action>
+		<action name="getUserByName" class="userAction" method="getUserByName">
+			<result name="success">user/updateUser.jsp</result>
+		</action>
+		<action name="updateUser" class="userAction" method="updateUser">
+			<result name="success" type="redirect">/showUser.action</result>
+			<result name="error" type="redirect">/getUserByName.action</result>
+		</action>
+		<action name="showConsume" class="consumeAction" method="showConsume">
+			<result name="success">consume/showConsume.jsp</result>
+		</action>
+		<action name="addConsume" class="consumeAction" method="addConsume">
+			<result name="success" type="redirect">showVip.action</result>
+			<result name="error">consume/addConsume.jsp</result>
+		</action>
+		<action name="checkVipShop" class="consumeAction" method="checkVipShop">
+			<result name="success">vip/checkVipShop.jsp</result>
+		</action>
+		<action name="showCommodity" class="commodityAction" method="showCommodity">
+			<result name="success">commodity/showCommodity.jsp</result>
+		</action>
+		<action name="mangerCommodity" class="commodityAction" method="mangerCommodity">
+			<result name="success" type="redirect">showCommodity.action</result>
+		</action>
+		<action name="addCommodity" class="commodityAction" method="addCommodity">
+			<result name="success"  type="redirect">showCommodity.action</result>
+			<result name="error">commodity/addCommodity.jsp</result>
+		</action>
+		<action name="getCommodityBycommodityId" class="commodityAction" method="getCommodityBycommodityId">
+			<result name="success">commodity/updateCommodity.jsp</result>
+			<result name="error">commodity/updateCommodity.jsp</result>
+		</action>
+		<action name="updateCommodity" class="commodityAction" method="updateCommodity">
+			<result name="success"  type="redirect">/showCommodity.action</result>
+			<result name="error">commodity/addCommodity.jsp</result>
+		</action>
+		<action name="deleteCommodity" class="commodityAction" method="deleteCommodity">
+			<result name="success"  type="redirect">/showCommodity.action</result>
+			<result name="error">commodity/showCommodity.jsp</result>
+		</action>
+		<action name="showVip" class="vipAction" method="showVip">
+			<result name="success">vip/showVip.jsp</result>
+		</action>
+		<action name="mangerVip" class="vipAction" method="mangerVip">
+			<result name="success">vip/mangerVip.jsp</result>
+		</action>
+		<action name="getVipById" class="vipAction" method="getVipById">
+			<result name="success">vip/updateVip.jsp</result>
+			<result name="error">vip/showVip.jsp</result>
+		</action>
+		<action name="getVipByNameId" class="vipAction" method="getVipByNameId">
+		<!-- 	<result name="success">vip/showVip.jsp</result> -->
+			<result name="success">consume/addConsume.jsp</result> 
+			<result name="error">vip/mangerVip.jsp</result>
+		</action>
+		<action name="updateVip" class="vipAction" method="updateVip">
+			<result name="success"  type="redirect">/showVip.action</result>
+			<result name="error" type="redirect">/showVip.action</result>
+		</action>
+		<action name="addVip" class="vipAction" method="addVip">
+			<result name="success"  type="redirect">/showVip.action</result>
+			<result name="error" >vip/addVip.jsp</result>
+		</action>
+		<action name="deleteVip" class="vipAction" method="deleteVip">
+			<result name="success"  type="redirect">/showVip.action</result>
+			<result name="error" type="redirect">/showVip.action</result>
+		</action>
+	</package>
+</struts>    

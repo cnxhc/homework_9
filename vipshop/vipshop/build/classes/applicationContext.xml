@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/vip_db?userUnicode=true&amp;characterEncoding=utf-8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/xhc/model/Vip.hbm.xml</value>
+				<value>com/xhc/model/Commodity.hbm.xml</value>
+				<value>com/xhc/model/Consume.hbm.xml</value>
+				<value>com/xhc/model/User.hbm.xml</value></list>
+		</property></bean>
+		<bean id="userDAO" class="com.xhc.dao.impl.UserDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+			</property>
+		</bean>
+		<bean id="userService" class="com.xhc.service.impl.UserService">
+			<property name="userDAO">
+				<ref bean="userDAO"/>
+			</property>
+		</bean>
+		<bean id="userAction" class="com.xhc.action.UserAction">
+			<property name="userService">
+				<ref bean="userService"/>
+			</property>
+		</bean>
+		<bean id="commodityDAO" class="com.xhc.dao.impl.CommodityDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+			</property>
+		</bean>
+		<bean id="commodityService" class="com.xhc.service.impl.CommodityService">
+			<property name="commodityDAO">
+				<ref bean="commodityDAO"/>
+			</property>
+		</bean>
+		<bean id="commodityAction" class="com.xhc.action.CommodityAction">
+			<property name="commodityService">
+				<ref bean="commodityService"/>
+			</property>
+		</bean>
+			<bean id="consumeDAO" class="com.xhc.dao.impl.ConsumeDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+			</property>
+		</bean>
+		<bean id="consumeService" class="com.xhc.service.impl.ConsumeService">
+			<property name="consumeDAO">
+				<ref bean="consumeDAO"/>
+			</property>
+		</bean>
+		<bean id="consumeAction" class="com.xhc.action.ConsumeAction">
+			<property name="consumeService">
+				<ref bean="consumeService"/>
+			</property>
+		</bean>
+		<bean id="vipDAO" class="com.xhc.dao.impl.VipDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+			</property>
+		</bean>
+		<bean id="vipService" class="com.xhc.service.impl.VipService">
+			<property name="vipDAO">
+				<ref bean="vipDAO"/>
+			</property>
+		</bean>
+		<bean id="vipAction" class="com.xhc.action.VipAction">
+			<property name="vipService">
+				<ref bean="vipService"/>
+			</property>
+		</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" /></beans>
